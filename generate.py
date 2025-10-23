@@ -40,7 +40,7 @@ for item in items:
       <news:name>PeoplePulseX</news:name>
       <news:language>en</news:language>
     </news:publication>
-    <news:publication_date>{pub.strftime("%Y-%m-%dT%H:%M:%SZ")}</news:publication_date>
+    <news:publication_date>{pub.strftime("%Y-%m-%dT%H:%M:%S")}Z</news:publication_date>
     <news:title>{title}</news:title>
   </news:news>
 </url>"""
