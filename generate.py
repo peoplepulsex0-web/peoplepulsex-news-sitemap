@@ -1,6 +1,5 @@
-import xml.etree.ElementTree as ET
+import requests, os, html
 from datetime import datetime, timedelta
-import html, os, urllib.request
 
 RSS_URL = "https://api.rss2json.com/v1/api.json?rss_url=https://www.peoplepulsex.com/feeds/posts/default?alt=rss"
 OUTPUT_DIR = "public"
@@ -8,16 +7,14 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "news-sitemap.xml")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-try:
-    urllib.request.urlretrieve(RSS_URL, os.path.join(OUTPUT_DIR, "rss.xml"))
-except Exception as e:
-    print("❌ فشل تحميل RSS:", e)
+print("🔄 Fetching RSS feed...")
+r = requests.get(RSS_URL)
+if r.status_code != 200:
+    print("❌ Failed to fetch RSS:", r.status_code)
     exit(1)
 
-rss = ET.parse(os.path.join(OUTPUT_DIR, "rss.xml"))
-root = rss.getroot()
-
-items = root.findall(".//item")
+data = r.json()
+items = data.get("items", [])
 now = datetime.utcnow()
 
 news_sitemap = """<?xml version="1.0" encoding="UTF-8"?>
@@ -26,16 +23,13 @@ news_sitemap = """<?xml version="1.0" encoding="UTF-8"?>
 """
 
 for item in items:
-    title = html.escape(item.findtext("title", ""))
-    link = html.escape(item.findtext("link", ""))
-    pubDate = item.findtext("pubDate", "")
-    if not pubDate:
-        continue
     try:
-        pub = datetime.strptime(pubDate, "%a, %d %b %Y %H:%M:%S %z").replace(tzinfo=None)
+        title = html.escape(item["title"])
+        link = html.escape(item["link"])
+        pub = datetime.strptime(item["pubDate"], "%Y-%m-%d %H:%M:%S")
+        if now - pub > timedelta(days=2):
+            continue
     except Exception:
-        continue
-    if now - pub > timedelta(days=2):
         continue
 
     news_sitemap += f"""
