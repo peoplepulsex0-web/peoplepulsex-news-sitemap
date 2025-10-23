@@ -1,7 +1,8 @@
 import requests, os, html
 from datetime import datetime, timedelta
+import xml.etree.ElementTree as ET
 
-RSS_URL = "https://api.rss2json.com/v1/api.json?rss_url=https://www.peoplepulsex.com/feeds/posts/default?alt=rss"
+RSS_URL = "https://www.peoplepulsex.com/feeds/posts/default?alt=rss"
 OUTPUT_DIR = "public"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "news-sitemap.xml")
 
@@ -13,8 +14,9 @@ if r.status_code != 200:
     print("❌ Failed to fetch RSS:", r.status_code)
     exit(1)
 
-data = r.json()
-items = data.get("items", [])
+root = ET.fromstring(r.content)
+channel = root.find("channel")
+
 now = datetime.utcnow()
 
 news_sitemap = """<?xml version="1.0" encoding="UTF-8"?>
@@ -22,11 +24,13 @@ news_sitemap = """<?xml version="1.0" encoding="UTF-8"?>
  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 """
 
-for item in items:
+for item in channel.findall("item"):
     try:
-        title = html.escape(item["title"])
-        link = html.escape(item["link"])
-        pub = datetime.strptime(item["pubDate"], "%Y-%m-%d %H:%M:%S")
+        title = html.escape(item.find("title").text)
+        link = html.escape(item.find("link").text)
+        pub = datetime.strptime(item.find("pubDate").text, "%a, %d %b %Y %H:%M:%S %z")
+        # تحويل إلى UTC بدون المنطقة الزمنية
+        pub = pub.astimezone(tz=None).replace(tzinfo=None)
         if now - pub > timedelta(days=2):
             continue
     except Exception:
