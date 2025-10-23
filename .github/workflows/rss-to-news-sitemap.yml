@@ -24,11 +24,10 @@ import html
 rss = ET.parse('public/rss.xml')
 root = rss.getroot()
 
-ns = {'atom': 'http://www.w3.org/2005/Atom'}
 items = root.findall('.//item')
 
 now = datetime.utcnow()
-news_sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
+news_sitemap = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 '''
