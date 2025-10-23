@@ -1,0 +1,71 @@
+name: Generate News Sitemap
+
+on:
+  schedule:
+    - cron: "0 * * * *" # يحدث كل ساعة
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Fetch RSS and generate news sitemap
+        run: |
+          mkdir -p public
+          curl -L https://www.peoplepulsex.com/rss.xml -o public/rss.xml
+          python3 - <<'EOF'
+import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta
+import html
+
+rss = ET.parse('public/rss.xml')
+root = rss.getroot()
+
+ns = {'atom': 'http://www.w3.org/2005/Atom'}
+items = root.findall('.//item')
+
+now = datetime.utcnow()
+news_sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+ xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+'''
+
+for item in items:
+    title = html.escape(item.findtext('title', ''))
+    link = html.escape(item.findtext('link', ''))
+    pubDate = item.findtext('pubDate', '')
+    if not pubDate:
+        continue
+    try:
+        pub = datetime.strptime(pubDate, "%a, %d %b %Y %H:%M:%S %z").replace(tzinfo=None)
+    except:
+        continue
+    if now - pub > timedelta(days=2):
+        continue
+
+    news_sitemap += f'''
+<url>
+  <loc>{link}</loc>
+  <news:news>
+    <news:publication>
+      <news:name>PeoplePulseX</news:name>
+      <news:language>en</news:language>
+    </news:publication>
+    <news:publication_date>{pub.isoformat()}</news:publication_date>
+    <news:title>{title}</news:title>
+  </news:news>
+</url>'''
+
+news_sitemap += "\n</urlset>"
+
+open('public/news-sitemap.xml', 'w', encoding='utf-8').write(news_sitemap)
+EOF
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
