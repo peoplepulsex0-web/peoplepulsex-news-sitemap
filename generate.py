@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 import html, os, urllib.request
 
-RSS_URL = "https://www.peoplepulsex.com/rss.xml"
+RSS_URL = "https://www.peoplepulsex.com/feeds/posts/default?alt=rss"
 OUTPUT_DIR = "public"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "news-sitemap.xml")
 
