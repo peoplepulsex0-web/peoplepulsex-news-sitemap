@@ -18,6 +18,10 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install dependencies
+        run: |
+          pip install requests
+
       - name: Run generate.py
         run: |
           python3 generate.py
