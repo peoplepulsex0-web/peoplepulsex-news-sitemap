@@ -3,6 +3,39 @@
  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
 <url>
+  <loc>https://www.peoplepulsex.com/2025/10/booker-prize-launches-new-award-to.html</loc>
+  <news:news>
+    <news:publication>
+      <news:name>PeoplePulseX</news:name>
+      <news:language>en</news:language>
+    </news:publication>
+    <news:publication_date>2025-10-24T00:00:00Z</news:publication_date>
+    <news:title>Booker Prize launches new award to celebrate children’s literature</news:title>
+  </news:news>
+</url>
+<url>
+  <loc>https://www.peoplepulsex.com/2025/10/windrush-victims-to-receive-75-advance.html</loc>
+  <news:news>
+    <news:publication>
+      <news:name>PeoplePulseX</news:name>
+      <news:language>en</news:language>
+    </news:publication>
+    <news:publication_date>2025-10-23T23:58:00Z</news:publication_date>
+    <news:title>Windrush victims to receive 75% advance under new compensation rules</news:title>
+  </news:news>
+</url>
+<url>
+  <loc>https://www.peoplepulsex.com/2025/10/mps-warn-uk-airport-expansion-threatens.html</loc>
+  <news:news>
+    <news:publication>
+      <news:name>PeoplePulseX</news:name>
+      <news:language>en</news:language>
+    </news:publication>
+    <news:publication_date>2025-10-23T23:42:00Z</news:publication_date>
+    <news:title>MPs warn UK airport expansion threatens net zero climate goals</news:title>
+  </news:news>
+</url>
+<url>
   <loc>https://www.peoplepulsex.com/2025/10/rights-group-urges-asean-to-reject.html</loc>
   <news:news>
     <news:publication>
@@ -627,50 +660,6 @@
     </news:publication>
     <news:publication_date>2025-10-22T21:20:00Z</news:publication_date>
     <news:title>Louvre Chief Admits Security Failures After €88m Jewel Heist</news:title>
-  </news:news>
-</url>
-<url>
-  <loc>https://www.peoplepulsex.com/2025/10/third-survivor-resigns-from-government.html</loc>
-  <news:news>
-    <news:publication>
-      <news:name>PeoplePulseX</news:name>
-      <news:language>en</news:language>
-    </news:publication>
-    <news:publication_date>2025-10-22T02:34:00Z</news:publication_date>
-    <news:title>Third Survivor Resigns from Government Grooming Gang Inquiry</news:title>
-  </news:news>
-</url>
-<url>
-  <loc>https://www.peoplepulsex.com/2025/10/prince-andrews-8m-lease-deal-explains.html</loc>
-  <news:news>
-    <news:publication>
-      <news:name>PeoplePulseX</news:name>
-      <news:language>en</news:language>
-    </news:publication>
-    <news:publication_date>2025-10-22T02:32:12Z</news:publication_date>
-    <news:title>Prince Andrew’s £8m Lease Deal Explains His Stay at Royal Lodge</news:title>
-  </news:news>
-</url>
-<url>
-  <loc>https://www.peoplepulsex.com/2025/10/major-study-ranks-antidepressants-by.html</loc>
-  <news:news>
-    <news:publication>
-      <news:name>PeoplePulseX</news:name>
-      <news:language>en</news:language>
-    </news:publication>
-    <news:publication_date>2025-10-22T02:30:00Z</news:publication_date>
-    <news:title>Major Study Ranks Antidepressants by Physical Side Effects</news:title>
-  </news:news>
-</url>
-<url>
-  <loc>https://www.peoplepulsex.com/2025/10/ukraine-targets-russian-chemical-plant.html</loc>
-  <news:news>
-    <news:publication>
-      <news:name>PeoplePulseX</news:name>
-      <news:language>en</news:language>
-    </news:publication>
-    <news:publication_date>2025-10-22T02:05:00Z</news:publication_date>
-    <news:title>Ukraine Targets Russian Chemical Plant With UK Storm Shadow Missiles</news:title>
   </news:news>
 </url>
 </urlset>
